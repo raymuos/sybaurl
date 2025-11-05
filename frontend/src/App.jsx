@@ -26,13 +26,11 @@ function App() {
         },
         body: JSON.stringify({ url: originalUrl }),
       });
-
-      if (!res.ok) {
-        throw new Error('Something went wrong. Please check the URL.');
-      }
+      if (!res.ok) throw new Error('Something went wrong. Please check the URL.');
 
       const data = await res.json();
       setShortUrl(data.shortId); 
+
     } catch (err) {
       setError(err.message);
     } finally {
@@ -42,38 +40,56 @@ function App() {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`${redirectUrl}/${shortUrl}`);
-    setCopyText('Copied!');
+    setTimeout(setCopyText('Copied!'), 2000);
   };
 
   return (
-    <div className="container">
-      <h1>sybaURL</h1>
-      <form onSubmit={handleSubmit} className="url-form">
-        <input
-          type="url"
-          value={originalUrl}
-          onChange={(e) => setOriginalUrl(e.target.value)}
-          placeholder="Enter a URL to fck"
-          required
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Loading' : 'Start'}
-        </button>
-      </form>
+    <div className="border-2 size-full min-h-screen flex justify-center items-center">
+      <div className="border-2 min-w-[300px] bg-amber-500 p-12">
+        <p className='font-semibold text-4xl text-center mb-8 '>sybaURL</p>
+        <form onSubmit={handleSubmit} className="flex gap-1 items-center">
+          <input
+            className='bg-white border-2 outline-0 text-lg px-4'
+            type="url"
+            value={originalUrl}
+            onChange={(e) => setOriginalUrl(e.target.value)}
+            placeholder="Enter a URL to fck"
+            required
+          />
+          <button className= {`border-2 border-black w-[120px] text-center
+                             ${isLoading? 
+                              'bg-black text-white' :
+                              'bg-white text-black hover:bg-black hover:text-white'}
+                             outline-0 text-lg font-semibold 
+                             transition duration-300 ease-in-out cursor-pointer
+                             `}
+                             type="submit" disabled={isLoading}>
+            {isLoading ? 'LOADING' : 'START'}
+          </button>
+        </form>
 
-      {error && <p className="error">{error}</p>}
+        {error && <p className="error">{error}</p>}
 
-      {shortUrl && (
-        <div className="result">
-          <p>Your fcked URL:</p>
-          <div className="short-url-container">
-            <a href={`${redirectUrl}/${shortUrl}`} target="_blank" rel="noopener noreferrer">
-              {`${redirectUrl}/${shortUrl}`}
-            </a>
-            <button onClick={handleCopy}>{copyText}</button>
+        {shortUrl && (
+          <div className="mt-4 text-lg w-full">
+            <p>Your fcked URL:</p>
+            <div className="border-2 border-black bg-amber-200 p-2 flex-col">
+              <a href={`${redirectUrl}/${shortUrl}`} target="_blank" rel="noopener noreferrer">
+                {`${redirectUrl}/${shortUrl}`}
+              </a>
+              <button
+              className='border-2 border-black w-full text-center
+                         outline-0 text-lg font-semibold 
+                         transition duration-300 ease-in-out cursor-pointer
+                         bg-white text-black hover:bg-black hover:text-white
+                         '
+              onClick={handleCopy}>
+                {copyText}
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

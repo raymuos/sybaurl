@@ -1,4 +1,6 @@
-body {
+@import "tailwindcss";
+
+/* body {
   font-family: monospace;
   background-color: #1e1e1e;
   color: #d4d4d4;
@@ -7,7 +9,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-}
+} 
 
 .container {
   width: 100%;
@@ -84,4 +86,4 @@ h1 {
 .error {
   color: #ff6b6b;
   text-align: center;
-}
+} */
