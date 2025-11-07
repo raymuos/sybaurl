@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Strider";
+  src: url(assets/fonts/CSStrider-Regular_demo-BF68fc57d0d37c1.otf);
+}
+
+.strider{
+  font-family: Strider;
+}
 /* body {
   font-family: monospace;
   background-color: #1e1e1e;

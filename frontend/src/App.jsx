@@ -40,23 +40,23 @@ function App() {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`${redirectUrl}/${shortUrl}`);
-    setTimeout(setCopyText('Copied!'), 2000);
+    setCopyText('Copied!');
   };
 
   return (
     <div className="border-2 size-full min-h-screen flex justify-center items-center">
-      <div className="border-2 min-w-[300px] bg-amber-500 p-12">
-        <p className='font-semibold text-4xl text-center mb-8 '>sybaURL</p>
-        <form onSubmit={handleSubmit} className="flex gap-1 items-center">
+      <div className="border-2 min-w-[300px] bg-green-500 p-4 lg:p-8">
+        <p className=' text-4xl text-center mb-8 font-light strider'>sybaURL</p>
+        <form onSubmit={handleSubmit} className=" flex flex-col md:flex-row gap-1 items-center">
           <input
-            className='bg-white border-2 outline-0 text-lg px-4'
+            className='bg-white border-2 outline-0 text-lg px-2 lg:px-4 w-full md:w-fit '
             type="url"
             value={originalUrl}
             onChange={(e) => setOriginalUrl(e.target.value)}
             placeholder="Enter a URL to fck"
             required
           />
-          <button className= {`border-2 border-black w-[120px] text-center
+          <button className= {`border-2 border-black w-full md:w-[100px] text-center
                              ${isLoading? 
                               'bg-black text-white' :
                               'bg-white text-black hover:bg-black hover:text-white'}
