@@ -33,7 +33,7 @@ function Signup(){
       if (!res.ok) throw new Error('Something went wrong. Try refreshing.');
       console.log("Created User: " + data);
 
-      navigate("/user/login");
+      navigate("/login");
 
       setEmail('');
       setUsername('');
