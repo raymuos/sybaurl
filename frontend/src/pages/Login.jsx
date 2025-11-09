@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import "../App.css";
 
-function Signup(){
+function Login(){
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const redirectUrl = import.meta.env.VITE_BACKEND_URL;
@@ -13,16 +12,15 @@ function Signup(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const signupUrl = `${redirectUrl}/user/signup/`;
+    const loginUrl = `${redirectUrl}/user/login/`;
     
     try {
-      const res = await fetch(signupUrl, {
+      const res = await fetch(loginUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
           username: username,
           password: password,
         }),
@@ -30,12 +28,11 @@ function Signup(){
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error('Something went wrong. Try refreshing.');
-      console.log("Created User: " + data);
+      if (!res.ok) throw new Error( data.message || 'Something went wrong. Try refreshing.');
+      console.log(data);
+      
+      navigate("/");
 
-      navigate("/login");
-
-      setEmail('');
       setUsername('');
       setPassword('');
       setError('');
@@ -59,7 +56,7 @@ function Signup(){
         <div className=" flex-3/4 ">
             <form onSubmit={handleSubmit} className=" flex flex-col gap-1 items-center">
                 <p className="text-4xl text-gray-200 font-light strider ">
-                    Sign Up
+                    Login
                 </p>
             <input
                 className='bg-gray-700 inter border-0 rounded-t-2xl rounded-b-lg outline-0 text-lg px-2 py-1 lg:px-4 w-full'
@@ -67,14 +64,6 @@ function Signup(){
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter username"
-                required
-            />
-            <input
-                className='bg-gray-700 inter border-0 rounded-lg outline-0 text-lg px-2 py-1 lg:px-4 w-full'
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter email id"
                 required
             />
             <input
@@ -92,7 +81,7 @@ function Signup(){
                                 transition duration-300 ease-in-out cursor-pointer
                                 `}
                                 type="submit">
-                Sign Up
+                Login
             </button>
             </form>
 
@@ -105,4 +94,4 @@ function Signup(){
 
 }
 
-export default Signup;
+export default Login;

@@ -44,8 +44,8 @@ function Home() {
   };
 
   return (
-    <div className="bg-gray-950 text-white size-full min-h-screen flex justify-center items-center inter">
-      <div className=" min-w-full md:min-w-[450px] lg:min-w-[600px] min-h-screen md:bg-blue-950 p-4 lg:p-8 
+    <div className="bg-gray-950 text-white size-full min-h-full flex justify-center items-center inter">
+      <div className=" w-full md:w-[450px] lg:w-[600px] min-h-screen md:bg-blue-950 p-4 lg:p-8 
                        flex items-center flex-col justify-center md:flex-row">
         <div className="shrink-0 md:w-[150px] flex justify-center items-center flex-1/4">
           <p className="text-7xl text-yellow-500 font-light strider 
@@ -60,14 +60,14 @@ function Home() {
                     Shorten your URL
               </p>
             <input
-                className='bg-gray-700 border-0 rounded-full outline-0 text-lg px-2 py-1 lg:px-4 w-full mb-2 inter'
+                className='bg-gray-700 border-0 rounded-lg outline-0 text-lg px-2 py-1 lg:px-4 w-full mb-2 inter'
                 type="url"
                 value={originalUrl}
                 onChange={(e) => setOriginalUrl(e.target.value)}
                 placeholder="Enter a URL"
                 required
             />
-            <button className= {`border-black border-0 rounded-full w-[100px] py-1 text-center
+            <button className= {`border-black border-0 rounded-lg w-[100px] py-1 text-center
                                 ${isLoading? 
                                 'bg-cyan-600 text-gray-50' :
                                 'bg-gray-50 text-gray-950 hover:bg-cyan-600 hover:text-gray-50'}
